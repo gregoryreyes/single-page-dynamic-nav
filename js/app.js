@@ -23,7 +23,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
     // Start Helper Functions
     function buildNavBasedOnAmountOfSections( children = null, parent = null ) {
       if ( children === null || parent === null ) {
-        return 'please pass both the children and parent parameters to the buildNavBasedOnAmountOfSections() function';
+        return 'please pass both the children and parent parameters' +
+          'to the buildNavBasedOnAmountOfSections() function';
       } else {
         navbarMenu.style.cssText = 'background: #000; padding: 2em;';
         const fragment = document.createDocumentFragment();
@@ -51,9 +52,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
     }
     // End Helper Functions
 
-    // start build the nav
+    // start building the nav
     buildNavBasedOnAmountOfSections( sections, navbarUl );
-    // end build the nav
+    // end building the nav
 
     // Begin Events
     navbarUl.addEventListener( 'click', e => {
