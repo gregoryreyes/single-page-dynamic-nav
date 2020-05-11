@@ -14,7 +14,7 @@
 
 ## Description
 
-A demonstration on programmatically building a navigation menu based on the amount of sections found on the page.
+A DOM manipulation exercise using vanilla JavaScript demonstrating how to dynamically build a navigation menu, and adding different types of events to manipulate and change the state of the DOM based on the user's activity.
 
 ## Techonologies
 

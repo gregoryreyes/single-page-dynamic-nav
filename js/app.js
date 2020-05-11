@@ -73,12 +73,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
     // End Events
 
     document.addEventListener( 'scroll', function() {
-
       for ( const section of sections ) {
         console.log( section.id + ' section.getBoundingClientRect().top ----> ', section.getBoundingClientRect().top );
-        // console.log( section.id + ' section.getBoundingClientRect().bottom ----> ', section.getBoundingClientRect().bottom );
-
-        // if ( section.getBoundingClientRect().top > -120 && section.getBoundingClientRect().bottom !== 200  ) {
         if ( section.getBoundingClientRect().top < 120 && section.getBoundingClientRect().bottom > 200  ) {
           section.classList.add( activeClassName );
         } else {
@@ -87,7 +83,6 @@ document.addEventListener( 'DOMContentLoaded', function() {
           }
         }
       }
-
     });
 
 });
