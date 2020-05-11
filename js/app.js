@@ -75,7 +75,11 @@ document.addEventListener( 'DOMContentLoaded', function() {
     document.addEventListener( 'scroll', function() {
 
       for ( const section of sections ) {
-        if ( section.getBoundingClientRect().top > -120 && section.getBoundingClientRect().bottom !== 200  ) {
+        console.log( section.id + ' section.getBoundingClientRect().top ----> ', section.getBoundingClientRect().top );
+        // console.log( section.id + ' section.getBoundingClientRect().bottom ----> ', section.getBoundingClientRect().bottom );
+
+        // if ( section.getBoundingClientRect().top > -120 && section.getBoundingClientRect().bottom !== 200  ) {
+        if ( section.getBoundingClientRect().top < 120 && section.getBoundingClientRect().bottom > 200  ) {
           section.classList.add( activeClassName );
         } else {
           if ( section.className === activeClassName ) {
