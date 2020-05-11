@@ -15,9 +15,9 @@
 
 document.addEventListener( 'DOMContentLoaded', function() {
     // Start - Define Global Variables
-    const navbarMenu = document.getElementsByClassName( 'navbar__menu' )[0];
     const navbarUl = document.getElementById( 'navbar__list' );
     const sections = document.querySelectorAll( 'section' );
+    const activeClassName = 'your-active-class';
     // End - Define Global Variables
 
     // Start Helper Functions
@@ -26,10 +26,12 @@ document.addEventListener( 'DOMContentLoaded', function() {
         return 'please pass both the children and parent parameters' +
           'to the buildNavBasedOnAmountOfSections() function';
       } else {
+        const navbarMenu = document.getElementsByClassName( 'navbar__menu' )[0];
         navbarMenu.style.cssText = 'background: #000; padding: 2em;';
         const fragment = document.createDocumentFragment();
 
         for ( const child of children ) {
+          child.querySelectorAll( 'h2' )[0].setAttribute( 'style', 'margin-top: 1.8em;')
           const newElement = document.createElement( 'li' );
 
           newElement.style.cssText = 'padding-left: 1em;'
@@ -46,7 +48,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
         return 'addActiveClassToSection requires activeSection and sections parameters';
       } else {
         for ( const section of sections ) {
-          section.id === activeSection.id ? section.classList.add( 'your-active-class' ) : section.classList.remove('your-active-class');
+          section.id === activeSection.id ? section.classList.add( activeClassName ) : section.classList.remove( activeClassName );
         }
       }
     }
@@ -63,12 +65,26 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
       // Scroll to section on link click
       const sectionID = document.getElementById( dataNavSection.id );
-      sectionID.scrollIntoView( { behavior: 'smooth' } );
+      sectionID.scrollIntoView( { behavior: 'smooth', block: 'start' } );
 
       // Add class 'active' to section when near top of viewport
       addActiveClassToSection( sectionID, sections );
     });
     // End Events
+
+    document.addEventListener( 'scroll', function() {
+
+      for ( const section of sections ) {
+        if ( section.getBoundingClientRect().top > -120 && section.getBoundingClientRect().bottom !== 200  ) {
+          section.classList.add( activeClassName );
+        } else {
+          if ( section.className === activeClassName ) {
+            section.classList.remove( activeClassName );
+          }
+        }
+      }
+
+    });
 
 });
 
