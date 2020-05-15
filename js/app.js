@@ -15,8 +15,12 @@
 
 document.addEventListener( 'DOMContentLoaded', function() {
   // Start - Define Global Variables
-  const navbarUl = document.getElementById( 'navbar__list' );
+  const navbarMenu = document.getElementsByClassName( 'navbar__menu' )[0];
+  const mainHero = document.getElementsByClassName( 'main__hero' )[0];
+  const mainSection = document.querySelector( 'main' );
   const sections = document.querySelectorAll( 'section' );
+  const footer = document.getElementsByClassName( 'page__footer' )[0];
+  const activeClassName = 'your-active-class';
   // End - Define Global Variables
 
   // Start Helper Functions
@@ -25,7 +29,6 @@ document.addEventListener( 'DOMContentLoaded', function() {
       return 'please pass both the children and parent parameters' +
         'to the buildNavBasedOnAmountOfSections() function';
     } else {
-      const navbarMenu = document.getElementsByClassName( 'navbar__menu' )[0];
       navbarMenu.style.cssText = 'background: #000; padding: 2em;';
 
       const fragment = document.createDocumentFragment();
@@ -45,11 +48,11 @@ document.addEventListener( 'DOMContentLoaded', function() {
   // End Helper Functions
 
   // start building the nav
-  buildNavBasedOnAmountOfSections( sections, navbarUl );
+  buildNavBasedOnAmountOfSections( sections, navbarMenu.children[0]  );
   // end building the nav
 
   // Begin Events
-  navbarUl.addEventListener( 'click', e => {
+  navbarMenu.children[0] .addEventListener( 'click', e => {
     e.preventDefault();
     const dataNavSection = document.querySelector( `[data-nav="${e.target.innerText}"]`);
 
@@ -59,43 +62,48 @@ document.addEventListener( 'DOMContentLoaded', function() {
   });
 
   // Start - add scroll to top functionality
-  const mainSection = document.querySelector( 'main' );
   mainSection.insertAdjacentHTML( 'beforeend', '<div class="scroll-to-top"><i class="fa fa-arrow-up"></i></div>' );
-
   const scrollToTopIconWrap = document.getElementsByClassName( 'scroll-to-top' )[0];
-  scrollToTopIconWrap.style.cssText = 'display:none;';
-
   const scrollToTopIcon = document.getElementsByClassName( 'fa-arrow-up' )[0];
-  scrollToTopIcon.style.cssText = 'padding: 0.7em';
+  const scrollToTopIcontStyle = 'display: block; margin: 0 1.7em; padding: 0.7em; position: fixed; bottom: 2.5em;' +
+        ' right: 0; border-radius: 50%; background-color: rgba(0, 0, 0, 0.35);';
 
   scrollToTopIcon.addEventListener( 'click', e => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
   // end - add scroll to top functionality
 
-  // Add class 'active' to section when near top of viewport
-  const activeClassName = 'your-active-class';
-
-  document.addEventListener( 'scroll', function() {
-
-    if ( mainSection.getBoundingClientRect().top < -220 ) {
-      scrollToTopIconWrap.style.cssText = 'display: block; margin: 0 2em; position: fixed; bottom: 1em;' +
-        ' right: 0; border-radius: 50%; background-color: rgba(0, 0, 0, 0.35);';
-    } else {
-      scrollToTopIconWrap.style.cssText = 'display:none;';
+  // start observing elements
+  let observer = new IntersectionObserver( function( mutations ) {
+    if ( mutations[0].target.tagName === 'SECTION' ) {
+      document.getElementsByClassName( activeClassName )[0].classList.remove( activeClassName );
+      mutations[0].target.classList.add( activeClassName );
     }
 
-    for ( const section of sections ) {
-      if ( section.getBoundingClientRect().top < 120 && section.getBoundingClientRect().bottom > 200  ) {
-        section.classList.add( activeClassName );
+    if ( mutations[0].target === mainHero ) {
+      if ( mutations[0].isIntersecting === true ) {
+        scrollToTopIconWrap.style.cssText = 'display: none';
       } else {
-        if ( section.className === activeClassName ) {
-          section.classList.remove( activeClassName );
-        }
+        scrollToTopIconWrap.style.cssText = scrollToTopIcontStyle;
       }
     }
-  });
-  // End Events
+
+    if ( mutations[0].target === footer ) {
+      if ( mutations[0].isIntersecting === true ) {
+        scrollToTopIconWrap.style.cssText = 'display: none';
+      } else {
+        scrollToTopIconWrap.style.cssText = scrollToTopIcontStyle;
+      }
+    }
+  } , { threshold: [ 0.7, 0.6 ] });
+
+  observer.observe( mainHero );
+  observer.observe( footer );
+
+  for ( const section of sections ) {
+    observer.observe( section );
+  }
+  // end observing elements
 
 });
 
