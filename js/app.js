@@ -63,6 +63,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
   // Start - add scroll to top functionality
   mainSection.insertAdjacentHTML( 'beforeend', '<div class="scroll-to-top"><i class="fa fa-arrow-up"></i></div>' );
+
   const scrollToTopIconWrap = document.getElementsByClassName( 'scroll-to-top' )[0];
   const scrollToTopIcon = document.getElementsByClassName( 'fa-arrow-up' )[0];
   const scrollToTopIcontStyle = 'display: block; margin: 0 1.7em; padding: 0.7em; position: fixed; bottom: 2.5em;' +
@@ -73,7 +74,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
   });
   // end - add scroll to top functionality
 
-  // start observing elements
+  // start Intersection Observer section
   let observer = new IntersectionObserver( function( mutations ) {
     if ( mutations[0].target.tagName === 'SECTION' ) {
       document.getElementsByClassName( activeClassName )[0].classList.remove( activeClassName );
@@ -103,7 +104,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
   for ( const section of sections ) {
     observer.observe( section );
   }
-  // end observing elements
+  // end Intersection Observer section
 
 });
 
