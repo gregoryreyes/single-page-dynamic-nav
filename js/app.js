@@ -74,13 +74,9 @@ document.addEventListener( 'DOMContentLoaded', () => {
     }, 200 );
 
     for ( const section of sections ) {
-      if ( section.getBoundingClientRect().top < 300 && section.getBoundingClientRect().bottom > 300  ) {
-        section.classList.add( activeClassName );
-      } else {
-        if ( section.className === activeClassName ) {
-          section.classList.remove( activeClassName );
-        }
-      }
+      section.getBoundingClientRect().top < 300 && section.getBoundingClientRect().bottom > 300  ?
+      section.classList.add( activeClassName ) :
+      section.classList.remove( activeClassName );
     }
   });
 
@@ -101,19 +97,15 @@ document.addEventListener( 'DOMContentLoaded', () => {
   // start Intersection Observer section
   let observer = new IntersectionObserver( mutations => {
     if ( mutations[0].target === mainHero ) {
-      if ( mutations[0].isIntersecting === true ) {
-        scrollToTopIconWrap.style.cssText = 'display: none';
-      } else {
-        scrollToTopIconWrap.style.cssText = scrollToTopIcontStyle;
-      }
+      scrollToTopIconWrap.style.cssText = mutations[0].isIntersecting === true ?
+        'display: none' :
+        scrollToTopIcontStyle;
     }
 
     if ( mutations[0].target === footer ) {
-      if ( mutations[0].isIntersecting === true ) {
-        scrollToTopIconWrap.style.cssText = 'display: none';
-      } else {
-        scrollToTopIconWrap.style.cssText = scrollToTopIcontStyle;
-      }
+      scrollToTopIconWrap.style.cssText = mutations[0].isIntersecting === true ?
+      'display: none' :
+      scrollToTopIcontStyle;
     }
   } , { threshold: [ 0.7 ] });
 
