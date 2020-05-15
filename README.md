@@ -3,6 +3,7 @@
 ## Table of Contents
 
 * [Author](#author)
+* [Project Link](#project-link)
 * [Description](#description)
 * [Techonologies](#techonologies)
 * [Misc](#misc)
@@ -14,7 +15,7 @@
 
 ## Project Link
 
-* https://gregreyes.dev/single-page-dynamic-nav/index.html
+* [gregreyes.dev/single-page-dynamic-nav/](https://gregreyes.dev/single-page-dynamic-nav/)
 
 ## Description
 
