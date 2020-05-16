@@ -6,7 +6,6 @@
 * [Project Link](#project-link)
 * [Description](#description)
 * [Techonologies](#techonologies)
-* [Misc](#misc)
 
 
 ## Author
@@ -24,6 +23,3 @@ A DOM manipulation exercise using vanilla JavaScript demonstrating how to dynami
 ## Technologies
 
 JavaScript
-
-## Misc
-* Used the following static starter code as a foundation in order to make the project dynamic using my own JavaScript code - https://github.com/udacity/fend/tree/refresh-2019/projects/landing-page

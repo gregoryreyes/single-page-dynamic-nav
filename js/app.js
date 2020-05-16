@@ -25,7 +25,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
   // end - define global variables
 
   // start helper functions
-  function buildNavBasedOnAmountOfSections( children = null, parent = null ) {
+  const buildNavBasedOnAmountOfSections = ( children = null, parent = null ) => {
     if ( children === null || parent === null ) {
       return 'please pass both the children and parent parameters' +
         'to the buildNavBasedOnAmountOfSections() function';
@@ -95,7 +95,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
   // end events
 
   // start Intersection Observer section
-  let observer = new IntersectionObserver( mutations => {
+  const observer = new IntersectionObserver( mutations => {
     if ( mutations[0].target === mainHero ) {
       scrollToTopIconWrap.style.cssText = mutations[0].isIntersecting === true ?
         'display: none' :
