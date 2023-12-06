@@ -14,7 +14,7 @@
 
 ## Project Link
 
-* [gregreyes.dev/single-page-dynamic-nav/](https://gregreyes.dev/single-page-dynamic-nav/)
+* [gregreyes.dev/projects/single-page-dynamic-nav/](https://gregreyes.dev/projects/single-page-dynamic-nav/)
 
 ## Description
 
